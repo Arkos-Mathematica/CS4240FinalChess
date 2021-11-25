@@ -2,7 +2,7 @@ print("I'm chessing!")
 def main():
     print("we're doing stuff!")
 
-    print("Riley was here")
+    print("Riley was here. This fetch/pull thing is interesting.")
 
     gold="Au"
     if gold != "Ag":
