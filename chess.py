@@ -8,3 +8,5 @@ def main():
     if gold != "Ag":
         print("good")
 main()
+
+print("Checking... tv")
