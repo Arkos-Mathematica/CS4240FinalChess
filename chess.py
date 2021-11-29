@@ -1,16 +1,19 @@
 print("I'm chessing!")
+
+board = [
+["R","N","B","K","Q","B","N","R"],
+["P","P","P","P","P","P","P","P"],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+["p","p","p","p","p","p","p","p"],
+["r","n","b","k","q","b","n","r"]
+]
+
 def main():
-    board = [
-    ["R","N","B","K","Q","B","N","R"],
-    ["P","P","P","P","P","P","P","P"],
-    [0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0],
-    ["p","p","p","p","p","p","p","p"],
-    ["r","n","b","k","q","b","n","r"]
-    ]
-    print(move("5254", position))
+
+    print(move("5254", board))
 
 def is_legal(change, board):
 
@@ -69,7 +72,9 @@ def is_legal(change, board):
 
                     if end_row == start_row + 1:
 
-                        if board[start_row][start_col].isupper() != board[end_row][end_col].isupper()
+                        if board[start_row][start_col].isupper() != board[end_row][end_col].isupper():
+
+                            return True
 
                     else:
 
@@ -116,7 +121,9 @@ def is_legal(change, board):
 
                     if end_row == start_row - 1:
 
-                        if board[start_row][start_col].isupper() != board[end_row][end_col].isupper()
+                        if board[start_row][start_col].isupper() != board[end_row][end_col].isupper():
+
+                            return True
 
                     else:
 
@@ -170,7 +177,7 @@ def move (change, board):
     elif change.upper() == "O-O":
         #king side castle
         pass
-    elif change[-2]=="="
+    elif change[-2]=="=":
         #promotion
         pass
     else:
@@ -178,7 +185,7 @@ def move (change, board):
         start_col = int(change[0])-1
         end_row = int(change[3])-1
         end_col = int(change[2])-1
-        board[end_row][end_col]=position[start_row][start_col]
+        board[end_row][end_col]=board[start_row][start_col]
         board[start_row][start_col] = 0
         return (board)
 
