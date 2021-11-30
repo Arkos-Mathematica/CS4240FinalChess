@@ -17,9 +17,9 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
-width = 20
-height = 20
-margin = 5
+width = 40
+height = 40
+margin = 10
 from chess import board
 
 pygame.init()
