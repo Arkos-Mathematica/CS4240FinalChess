@@ -158,7 +158,7 @@ def is_legal(change, board):
 
                     return False
 
-        if end_row == start_row + 2 or end_row == start_row - 2:
+        elif end_row == start_row + 2 or end_row == start_row - 2:
 
             if end_col == start_col + 1 or end_col == start_col - 1:
 
@@ -169,6 +169,21 @@ def is_legal(change, board):
                 else:
 
                     return False
+
+            else:
+
+                return False
+
+        else:
+
+            return False
+
+
+    # ROOK CASES
+
+    if board[start_row][start_col].lower() == "R":
+
+        pass
 
 def move (change, board):
     if change.upper() == "O-O-O":

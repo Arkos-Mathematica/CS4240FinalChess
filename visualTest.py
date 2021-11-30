@@ -61,11 +61,12 @@ while not done:
         for col in range(8):
             pygame.draw.rect(screen, WHITE, [margin+col*(margin+width),margin+row*(margin+height),width, height])
 
-    font = pygame.font.SysFont('Calibri', 25, True, False)
+    font = pygame.font.SysFont('Calibri', height, True, False)
     for row in range(8):
         for col in range(8):
-            text = font.render(str(board[row][col]), True, BLACK)
-            screen.blit(text, [margin+col*(margin+width),margin+row*(margin+height)])
+            if board[row][col] != 0:
+                text = font.render(str(board[row][col]), True, BLACK)
+                screen.blit(text, [2*margin+col*(margin+width),margin+row*(margin+height)])
 
 
 
