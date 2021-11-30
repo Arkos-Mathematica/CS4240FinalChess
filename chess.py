@@ -1,19 +1,19 @@
 print("I'm chessing!")
 
 board = [
-["R","N","B","K","Q","B","N","R"],
+["R","N","B","Q","K","B","N","R"],
 ["P","P","P","P","P","P","P","P"],
-[0,0,0,0,0,0,0,0],
+["R",0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0],
 ["p","p","p","p","p","p","p","p"],
-["r","n","b","k","q","b","n","r"]
+["r","n","b","q","k","b","n","r"]
 ]
 
 def main():
 
-    print(move("5254", board))
+    print(move("1353", board))
 
 def is_legal(change, board):
 
@@ -33,8 +33,6 @@ def is_legal(change, board):
 
 
     # check for piece
-
-
 
     # PAWN CASES
 
@@ -136,8 +134,6 @@ def is_legal(change, board):
 
                 return False
 
-
-
     # KNIGHT CASES
 
     if board[start_row][start_col].lower() == "k":
@@ -178,12 +174,68 @@ def is_legal(change, board):
 
             return False
 
-
     # ROOK CASES
 
     if board[start_row][start_col].lower() == "R":
 
-        pass
+        if end_col == start_col:
+
+            # Rook is moving vertically
+
+            if end_row > start_row:
+
+                # Rook is moving upward
+
+                for i in range(end_row - start_row):
+
+                    if board[i][start_col] != 0:
+
+                        return False
+
+                return True
+
+            if end_row < start_row:
+
+                # Rook is moving downward
+
+                for i in range(end_row - start_row):
+
+                    if board[i][start_col] != 0:
+
+                        return False
+
+                return True
+
+        elif end_row == start_row:
+
+            # Rook is moving hortizontally
+
+            if end_col > start_col:
+
+                # Rook is moving to the right
+
+                for i in range(end_row - start_row):
+
+                    if board[i][start_col] != 0:
+
+                        return False
+
+                return True
+
+            if end_col < start_col:
+
+                # Rook is moving to the left
+
+                for i in range(end_row - start_row):
+
+                    if board[i][start_col] != 0:
+
+                        return False
+
+                return True
+        else:
+
+            return False
 
 def move (change, board):
     if change.upper() == "O-O-O":
@@ -200,9 +252,11 @@ def move (change, board):
         start_col = int(change[0])-1
         end_row = int(change[3])-1
         end_col = int(change[2])-1
-        board[end_row][end_col]=board[start_row][start_col]
-        board[start_row][start_col] = 0
-        return (board)
-
+        if is_legal(change, board) == True:
+            board[end_row][end_col]=board[start_row][start_col]
+            board[start_row][start_col] = 0
+            return (board)
+        else:
+            return "Illegal move"
 
 main()

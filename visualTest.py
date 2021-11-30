@@ -14,7 +14,7 @@ import pygame
 # Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
+GREEN = (102, 204, 0)
 RED = (255, 0, 0)
 
 width = 40
@@ -27,6 +27,7 @@ pygame.init()
 # Set the width and height of the screen [width, height]
 size = (8*width+9*margin, 8*height+9*margin)
 screen = pygame.display.set_mode(size)
+font = pygame.font.SysFont('Calibri', height, True, False)
 
 pygame.display.set_caption("My Game")
 
@@ -42,9 +43,11 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-
-
-
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            pos = pygame.mouse.get_pos()
+            column = pos[0] // (width + margin)
+            row = pos[1] // (height + margin)
+            print("position:", row, column)
 
     # --- Game logic should go here
     # --- Screen-clearing code goes here
@@ -61,12 +64,11 @@ while not done:
         for col in range(8):
             pygame.draw.rect(screen, WHITE, [margin+col*(margin+width),margin+row*(margin+height),width, height])
 
-    font = pygame.font.SysFont('Calibri', height, True, False)
     for row in range(8):
         for col in range(8):
             if board[row][col] != 0:
                 text = font.render(str(board[row][col]), True, BLACK)
-                screen.blit(text, [2*margin+col*(margin+width),margin+row*(margin+height)])
+                screen.blit(text, [2*margin+col*(margin+width), (7*height+8*margin) - (row*(margin+height))])
 
 
 
