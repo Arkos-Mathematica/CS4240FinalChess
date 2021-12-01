@@ -62,7 +62,9 @@ while not done:
     screen.fill(BLACK)
     for row in range (8):
         for col in range(8):
-            pygame.draw.rect(screen, WHITE, [margin+col*(margin+width),margin+row*(margin+height),width, height])
+            pygame.draw.rect(screen, WHITE, [margin+col*(margin+width),margin+row*(margin+height),width, height])  
+        if ((row + col)% 2) != 0:                
+                pygame.draw.rect(screen, GREEN, [(margin+col*(margin+width)) , (margin+row*(margin+height)), width, height], ((height - width)))
 
     for row in range(8):
         for col in range(8):
