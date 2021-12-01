@@ -176,7 +176,7 @@ def is_legal(change, board):
 
     # ROOK CASES
 
-    if board[start_row][start_col].lower() == "R":
+    if board[start_row][start_col].lower() == "r":
 
         if end_col == start_col:
 
