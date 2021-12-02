@@ -237,6 +237,232 @@ def is_legal(change, board):
 
             return False
 
+    # KING CASES
+
+    if board[start_row][start_col].lower() == "k":
+
+        if abs(end_col - start_col) == 1 or abs(end_row - start_row) == 1:
+
+            return True
+
+        else:
+
+            return False
+
+    # BISHOP CASES
+
+    if board[start_row][start_col].lower() == "b":
+
+        if end_row > start_row and end_col > start_col:
+
+            # bishop is moving up and to the right
+
+            if end_row - start_row == end_col - start_col:
+
+                for i in range(end_row - start_row):
+
+                    if board[start_row + i][start_col + i] != 0:
+
+                        return False
+
+                return True
+
+            else:
+
+                return False
+
+        if end_row < start_row and end_col > start_col:
+
+            # bishop is moving down and to the right
+
+            if start_row - end_row == end_col - start_col:
+
+                for i in range(start_row - end_row):
+
+                    if board[start_row - i][start_col + i] != 0:
+
+                        return False
+
+                return True
+
+            else:
+
+                return False
+
+        if end_row > start_row and end_col < start_col:
+
+            # bishop is moving up and to the left
+
+            if end_row - start_row == start_col - end_col:
+
+                for i in range(end_row - start_row):
+
+                    if board[start_row + i][start_col - i] != 0:
+
+                        return False
+
+                return True
+
+            else:
+
+                return False
+
+        if end_row < start_row and end_col < start_col:
+
+            # bishop is moving down and to the left
+
+            if start_row - end_row == start_col - end_col:
+
+                for i in range(start_row - end_row):
+
+                    if board[start_row - i][start_col - i] != 0:
+
+                        return False
+
+                return True
+
+            else:
+
+                return False
+
+    # QUEEN CASES
+
+    if board[start_row][start_col].lower() == "q":
+
+        # ROOK CASES
+
+        if end_col == start_col:
+
+            # Rook is moving vertically
+
+            if end_row > start_row:
+
+                # Rook is moving upward
+
+                for i in range(end_row - start_row):
+
+                    if board[i][start_col] != 0:
+
+                        return False
+
+                return True
+
+            if end_row < start_row:
+
+                # Rook is moving downward
+
+                for i in range(end_row - start_row):
+
+                    if board[i][start_col] != 0:
+
+                        return False
+
+                return True
+
+        elif end_row == start_row:
+
+            # Rook is moving hortizontally
+
+            if end_col > start_col:
+
+                # Rook is moving to the right
+
+                for i in range(end_row - start_row):
+
+                    if board[i][start_col] != 0:
+
+                        return False
+
+                return True
+
+            if end_col < start_col:
+
+                # Rook is moving to the left
+
+                for i in range(end_row - start_row):
+
+                    if board[i][start_col] != 0:
+
+                        return False
+
+                return True
+
+        # BISHOP CASES
+
+        if end_row > start_row and end_col > start_col:
+
+            # bishop is moving up and to the right
+
+            if end_row - start_row == end_col - start_col:
+
+                for i in range(end_row - start_row):
+
+                    if board[start_row + i][start_col + i] != 0:
+
+                        return False
+
+                return True
+
+            else:
+
+                return False
+
+        if end_row < start_row and end_col > start_col:
+
+            # bishop is moving down and to the right
+
+            if start_row - end_row == end_col - start_col:
+
+                for i in range(start_row - end_row):
+
+                    if board[start_row - i][start_col + i] != 0:
+
+                        return False
+
+                return True
+
+            else:
+
+                return False
+
+        if end_row > start_row and end_col < start_col:
+
+            # bishop is moving up and to the left
+
+            if end_row - start_row == start_col - end_col:
+
+                for i in range(end_row - start_row):
+
+                    if board[start_row + i][start_col - i] != 0:
+
+                        return False
+
+                return True
+
+            else:
+
+                return False
+
+        if end_row < start_row and end_col < start_col:
+
+            # bishop is moving down and to the left
+
+            if start_row - end_row == start_col - end_col:
+
+                for i in range(start_row - end_row):
+
+                    if board[start_row - i][start_col - i] != 0:
+
+                        return False
+
+                return True
+
+            else:
+
+                return False
+
+        return False
+
 def move (change, board):
     if change.upper() == "O-O-O":
         #queen side castle
