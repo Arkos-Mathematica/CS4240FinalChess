@@ -3,7 +3,7 @@ print("I'm chessing!")
 board = [
 ["R","N","B","Q","K","B","N","R"],
 ["P","P","P","P","P","P","P","P"],
-["R",0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0],
 [0,0,0,0,0,0,0,0],
@@ -13,7 +13,7 @@ board = [
 
 def main():
 
-    print(move("1353", board))
+    print(move("5254", board))
 
 def is_legal(change, board):
 
