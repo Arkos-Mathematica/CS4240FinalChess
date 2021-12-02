@@ -11,19 +11,27 @@ board = [
 ["r","n","b","q","k","b","n","r"]
 ]
 
-def main():
-
-    print(move("5254", board))
-
-def is_legal(change, board):
+def is_legal(change, board, color):
 
     # set variables for rows and columns
 
-    start_row = int(change[1])-1
-    start_col = int(change[0])-1
-    end_row = int(change[3])-1
-    end_col = int(change[2])-1
+    if color:
 
+        start_row = 9 - int(change[1])
+        start_col = 9 - int(change[0])
+        end_row = 9 - int(change[3])
+        end_col = 9 - int(change[2])
+
+    else:
+
+        start_row = int(change[1])-1
+        start_col = int(change[0])-1
+        end_row = int(change[3])-1
+        end_col = int(change[2])-1
+
+    piece_type=str(board[start_row][start_col]).lower()
+
+    print(piece_type)
     # FIRST thing to check
 
     if board[end_row][end_col] != 0 and board[start_row][start_col].isupper() == board[end_row][end_col].isupper():
@@ -36,9 +44,9 @@ def is_legal(change, board):
 
     # PAWN CASES
 
-    if board[start_row][start_col].lower() == "p":
+    if piece_type == "p":
 
-        if board[start_row][start_col] == "P":
+        if color:
 
             # if the piece is a white pawn:
 
@@ -50,9 +58,21 @@ def is_legal(change, board):
 
                     # if the pawn is moving forward one space:
 
-                    return True
+                    if board[end_row][end_col] == 0:
+
+                        return True
+
+                    else:
+
+                        return False
 
                 elif end_row == start_row + 2:
+
+                    if color:
+
+                        if start_row == 2:
+
+                            pass
 
                     if board[end_row - 1][end_col] == 0:
 
@@ -85,7 +105,7 @@ def is_legal(change, board):
 
                 return False
 
-        elif board[start_row][start_col] == "p":
+        elif not color:
 
             # if the piece is a black pawn:
 
@@ -136,7 +156,7 @@ def is_legal(change, board):
 
     # KNIGHT CASES
 
-    if board[start_row][start_col].lower() == "k":
+    if piece_type == "k":
 
         # no deliniation between colors, moves are the same for each
 
@@ -176,7 +196,7 @@ def is_legal(change, board):
 
     # ROOK CASES
 
-    if board[start_row][start_col].lower() == "r":
+    if piece_type == "r":
 
         if end_col == start_col:
 
@@ -239,7 +259,7 @@ def is_legal(change, board):
 
     # KING CASES
 
-    if board[start_row][start_col].lower() == "k":
+    if piece_type == "k":
 
         if abs(end_col - start_col) == 1 or abs(end_row - start_row) == 1:
 
@@ -251,7 +271,7 @@ def is_legal(change, board):
 
     # BISHOP CASES
 
-    if board[start_row][start_col].lower() == "b":
+    if piece_type == "b":
 
         if end_row > start_row and end_col > start_col:
 
@@ -327,7 +347,7 @@ def is_legal(change, board):
 
     # QUEEN CASES
 
-    if board[start_row][start_col].lower() == "q":
+    if piece_type == "q":
 
         # ROOK CASES
 
@@ -463,7 +483,8 @@ def is_legal(change, board):
 
         return False
 
-def move (change, board):
+def move (change, board, color):
+    print(change)
     if change.upper() == "O-O-O":
         #queen side castle
         pass
@@ -474,15 +495,9 @@ def move (change, board):
         #promotion
         pass
     else:
-        start_row = int(change[1])-1
-        start_col = int(change[0])-1
-        end_row = int(change[3])-1
-        end_col = int(change[2])-1
-        if is_legal(change, board) == True:
+        if is_legal(change, board, color) == True:
             board[end_row][end_col]=board[start_row][start_col]
             board[start_row][start_col] = 0
             return (board)
         else:
             return "Illegal move"
-
-main()

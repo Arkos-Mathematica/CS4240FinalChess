@@ -23,7 +23,11 @@ width = 40
 height = 40
 margin = 10
 
-color=0
+color=1
+
+position1 = 0
+position2 = 0
+
 
 pygame.init()
 
@@ -65,6 +69,41 @@ def print_board(color):
                     text = font.render(str(board[row][col]), True, BLACK)
                     screen.blit(text, [(7*width+8*margin)-(col*(margin+width)), margin+(row*(margin+height))])
 
+def turn(row, column):
+
+    global position1
+    global position2
+
+    if position1 == 0:
+
+        if color:
+
+            position1=str(row) + str(column)
+
+        else:
+
+            position1=str(9 - column) + str(9 - row)
+
+        print(position1)
+
+    elif position2 == 0:
+
+        if color:
+
+            position2=str(row) + str(column)
+
+        else:
+
+            position2=str(9 - column) + str(9 - row)
+
+        print(position2)
+
+        requested_move = position1 + position2
+
+        move(requested_move, board, color)
+
+        position1, position2 = 0, 0
+
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
@@ -80,15 +119,8 @@ while not done:
             pos = pygame.mouse.get_pos()
             column = 1+(pos[0] // (width + margin))
             row = 8-(pos[1] // (height + margin))
-            if color:
+            turn(row, column)
 
-                position=str(row) + str(column)
-
-            else:
-
-                position=str(9 - column) + str(9 - row)
-
-            print(position)
 
     # --- Game logic should go here
 
