@@ -8,7 +8,6 @@
 
  Explanation video: http://youtu.be/vRB_983kUMc
 """
-
 import pygame
 
 from chess import *
@@ -23,7 +22,7 @@ width = 40
 height = 40
 margin = 10
 
-color=1
+color=0
 
 position1 = 0
 position2 = 0
@@ -74,33 +73,41 @@ def turn(row, column):
     global position1
     global position2
 
+    global start_row
+    global start_col
+    global end_row
+    global end_col
+
     if position1 == 0:
 
         if color:
 
-            position1=str(row) + str(column)
+            start_row, start_col=row, column
+            position1 = 1
 
         else:
 
-            position1=str(9 - column) + str(9 - row)
+            start_row, start_col = 8 - row, 8 - column
+            position1 = 1
 
-        print(position1)
+        print(start_col+1, start_row+1)
 
     elif position2 == 0:
 
         if color:
 
-            position2=str(row) + str(column)
+            end_row, end_col = row, column
+            position2 = 1
 
         else:
 
-            position2=str(9 - column) + str(9 - row)
+            end_row, end_col = 8 - row, 8 - column
+            position2 = 1
 
-        print(position2)
+        print(end_col+1, end_row+1)
 
-        requested_move = position1 + position2
 
-        move(requested_move, board, color)
+        move(start_row, start_col, end_row, end_col, board, color)
 
         position1, position2 = 0, 0
 
@@ -123,16 +130,6 @@ while not done:
 
 
     # --- Game logic should go here
-
-    ##Below, not done
-
-    '''mouse_pressed = pygame.mouse.get_pressed()
-
-    if mouse_pressed
-    MOUSEBUTTONDOWN
-    MOUSEBUTTONUP
-    MOUSEBUTTONMOTION
-'''
     # --- Screen-clearing code goes here
 
 

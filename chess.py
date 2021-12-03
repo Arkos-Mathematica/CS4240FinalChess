@@ -11,23 +11,37 @@ board = [
 ["r","n","b","q","k","b","n","r"]
 ]
 
-def is_legal(change, board, color):
+def is_in_check(board, color):
 
-    # set variables for rows and columns
+    # FIRST: find the KING
 
-    if color:
+    target = "K" if color else "k"
 
-        start_row = 9 - int(change[1])
-        start_col = 9 - int(change[0])
-        end_row = 9 - int(change[3])
-        end_col = 9 - int(change[2])
+    for row in board:
 
-    else:
+        for col in row:
 
-        start_row = int(change[1])-1
-        start_col = int(change[0])-1
-        end_row = int(change[3])-1
-        end_col = int(change[2])-1
+            if board[row][col] == target:
+
+                king = (row, col)
+
+                break
+
+    # first: check if king is attacked horizontally/vertically
+
+
+def is_legal(start_row, start_col, end_row, end_col, board, color):
+
+    """
+    start_row (int): Row of the piece to be moved
+    start_col (int): Column of the piece to be moved
+    end_row (int): Row of the desired end sqaure
+    end_col (int): Column of the desired end square
+
+    board (list): List of lists; array representing board state
+
+    color (bool): Either 1 or 0, represents current player (white or black)
+    """
 
     piece_type=str(board[start_row][start_col]).lower()
 
@@ -38,6 +52,7 @@ def is_legal(change, board, color):
 
         return False
 
+    # SECOND thing to check: check
 
 
     # check for piece
@@ -483,21 +498,21 @@ def is_legal(change, board, color):
 
         return False
 
-def move (change, board, color):
-    print(change)
-    if change.upper() == "O-O-O":
-        #queen side castle
-        pass
-    elif change.upper() == "O-O":
-        #king side castle
-        pass
-    elif change[-2]=="=":
-        #promotion
-        pass
+def move (start_r, start_c, end_r, end_c, board, color):
+    """
+    start_r (int): Row of the piece to be moved
+    start_c (int): Column of the piece to be moved
+    end_r (int): Row of the desired end sqaure
+    end_c (int): Column of the desired end square
+
+    board (list): List of lists; array representing board state
+
+    color (bool): Either 1 or 0, represents current player (white or black)
+    """
+
+    if is_legal(start_r, start_c, end_r, end_c, board, color) == True:
+        board[end_r][end_c]=board[start_r][start_c]
+        board[start_r][start_c] = 0
+        return (board)
     else:
-        if is_legal(change, board, color) == True:
-            board[end_row][end_col]=board[start_row][start_col]
-            board[start_row][start_col] = 0
-            return (board)
-        else:
-            return "Illegal move"
+        return "Illegal move"
