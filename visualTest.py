@@ -72,7 +72,7 @@ def turn(row, column):
 
     global position1
     global position2
-
+    global color
     global start_row
     global start_col
     global end_row
@@ -81,7 +81,6 @@ def turn(row, column):
     if position1 == 0:
 
         if color:
-
             start_row, start_col=row, column
             position1 = 1
 
@@ -95,7 +94,6 @@ def turn(row, column):
     elif position2 == 0:
 
         if color:
-
             end_row, end_col = row, column
             position2 = 1
 
@@ -110,6 +108,8 @@ def turn(row, column):
         move(start_row, start_col, end_row, end_col, board, color)
 
         position1, position2 = 0, 0
+
+        #color= (color + 1)%2
 
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()

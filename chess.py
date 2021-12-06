@@ -48,7 +48,7 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
     print(piece_type)
     # FIRST thing to check
 
-    if board[end_row][end_col] != 0 and board[start_row][start_col].isupper() == board[end_row][end_col].isupper():
+    if str(board[end_row][end_col]) != '0' and str(board[start_row][start_col]).isupper() == str(board[end_row][end_col]).isupper():
 
         return False
 
@@ -83,13 +83,11 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
 
                 elif end_row == start_row + 2:
 
-                    if color:
+                    if color and start_row == 2:
 
-                        if start_row == 2:
+                            return True
 
-                            pass
-
-                    if board[end_row - 1][end_col] == 0:
+                    elif board[end_row - 1][end_col] == 0:
 
                         return True
 
@@ -169,13 +167,13 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
 
                 return False
 
-    # KNIGHT CASES
+    #  CASES
 
-    if piece_type == "k":
+    if piece_type == "n":
 
         # no deliniation between colors, moves are the same for each
 
-        # there are eight possible moves for any given knight
+        # there are eight possible moves for any given
 
         if end_row == start_row + 1 or end_row == start_row - 1:
 
@@ -217,29 +215,31 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
 
             # Rook is moving vertically
 
-            if end_row > start_row:
+            #if end_row > start_row:
 
                 # Rook is moving upward
 
-                for i in range(end_row - start_row):
+            for i in range(end_row, start_row, (start_row-end_row)//abs(start_row-end_row)):
 
-                    if board[i][start_col] != 0:
+                print(f"{i}: {board[i][start_col]}")
+                if board[i][start_col] != 0:
 
-                        return False
+                    return False
 
-                return True
 
-            if end_row < start_row:
+            return True
+
+            '''if end_row < start_row:
 
                 # Rook is moving downward
 
-                for i in range(end_row - start_row):
-
+                for i in range(end_row, start_row-1):
+                    print(board[i][start_col])
                     if board[i][start_col] != 0:
 
                         return False
 
-                return True
+                return True'''
 
         elif end_row == start_row:
 
@@ -511,8 +511,11 @@ def move (start_r, start_c, end_r, end_c, board, color):
     """
 
     if is_legal(start_r, start_c, end_r, end_c, board, color) == True:
-        board[end_r][end_c]=board[start_r][start_c]
+        print(board[end_r][end_c])
+        board[end_r][end_c]=str(board[start_r][start_c])
+        print("final: "+ board[end_r][end_c])
         board[start_r][start_c] = 0
         return (board)
     else:
+        print('Illegal Move')
         return "Illegal move"
