@@ -109,7 +109,7 @@ def turn(row, column):
 
         position1, position2 = 0, 0
 
-        #color= (color + 1)%2
+        #color = (color + 1) % 2
 
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()

@@ -46,128 +46,57 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
     piece_type=str(board[start_row][start_col]).lower()
 
     print(piece_type)
-    # FIRST thing to check
+
+    # FIRST things to check
 
     if str(board[end_row][end_col]) != '0' and str(board[start_row][start_col]).isupper() == str(board[end_row][end_col]).isupper():
+
+        print("end square is occupied")
 
         return False
 
     # SECOND thing to check: check
 
+    if "check" == True:
+
+        return False
 
     # check for piece
 
-    # PAWN CASES
+    # PAWN CASES (FINISHED)
 
     if piece_type == "p":
 
-        if color:
 
-            # if the piece is a white pawn:
+        forward = 1 if str(board[start_row][start_col]).isupper() else -1
 
-            if end_col == start_col:
+        #move 2 from initial line
+        #move 1 forward
+        #taking (allowance for horizontal movement)
 
-                # if the pawn is moving strictly forward:
+        if forward*(end_row-start_row) == 2 and (start_row == 1 or start_row == 6) and start_col == end_col and board[start_row - forward][start_col] != 0:
 
-                if end_row == start_row + 1:
+            return True
 
-                    # if the pawn is moving forward one space:
+        elif forward * (end_row - start_row) == 1:
 
-                    if board[end_row][end_col] == 0:
+            if end_col == start_col and str(board[end_row][end_col]) == "0":
 
-                        return True
+                return True
 
-                    else:
+            elif abs(end_col - start_col) == 1 and str(board[end_row][end_col]) != "0" and str(board[end_row][end_col]).isupper() != str(board[start_row][start_col]).isupper():
 
-                        return False
+                return True
 
-                elif end_row == start_row + 2:
-
-                    if color and start_row == 2:
-
-                            return True
-
-                    elif board[end_row - 1][end_col] == 0:
-
-                        return True
-
-                    else:
-
-                        return False
-
-            elif end_col == start_col + 1 or end_col == start_col - 1:
-
-                # pawn must be capturing
-
-                if board[end_row][end_col] != 0:
-
-                    if end_row == start_row + 1:
-
-                        if board[start_row][start_col].isupper() != board[end_row][end_col].isupper():
-
-                            return True
-
-                    else:
-
-                        return False
-
-                else:
-
-                    return False
             else:
 
                 return False
 
-        elif not color:
+        else:
 
-            # if the piece is a black pawn:
+            return False
 
-            if end_col == start_col:
-
-                # if the pawn is moving strictly forward:
-
-                if end_row == start_row - 1:
-
-                    # if the pawn is moving forward one space:
-
-                    return True
-
-                elif end_row == start_row - 2:
-
-                    # if the pawn is moving forward two spaces:
-
-                    if board[end_row + 1][end_col] == 0:
-
-                        return True
-
-                    else:
-
-                        return False
-
-            elif end_col == start_col + 1 or end_col == start_col - 1:
-
-                # pawn must be capturing
-
-                if board[end_row][end_col] != 0:
-
-                    if end_row == start_row - 1:
-
-                        if board[start_row][start_col].isupper() != board[end_row][end_col].isupper():
-
-                            return True
-
-                    else:
-
-                        return False
-
-                else:
-
-                    return False
-            else:
-
-                return False
-
-    #  CASES
+    # knight CASES (FINISHED)
 
     if piece_type == "n":
 
@@ -179,25 +108,17 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
 
             if end_col == start_col + 2 or end_col == start_col - 2:
 
-                if board[end_row][end_col] == 0 or board[start_col][start_row].isupper() != board[end_row][end_col].isupper():
+                return True
 
-                    return True
+            else:
 
-                else:
-
-                    return False
+                return False
 
         elif end_row == start_row + 2 or end_row == start_row - 2:
 
             if end_col == start_col + 1 or end_col == start_col - 1:
 
-                if board[end_row][end_col] == 0 or board[start_col][start_row].isupper() != board[end_row][end_col].isupper():
-
-                    return True
-
-                else:
-
-                    return False
+                return True
 
             else:
 
@@ -207,7 +128,7 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
 
             return False
 
-    # ROOK CASES
+    # ROOK CASES (FINISHED)
 
     if piece_type == "r":
 
@@ -218,8 +139,8 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
             #if end_row > start_row:
 
                 # Rook is moving upward
-
-            for i in range(end_row, start_row, (start_row-end_row)//abs(start_row-end_row)):
+            modifier = (start_row-end_row)//abs(start_row-end_row)
+            for i in range(end_row+modifier, start_row, modifier):
 
                 print(f"{i}: {board[i][start_col]}")
                 if board[i][start_col] != 0:
@@ -229,54 +150,18 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
 
             return True
 
-            '''if end_row < start_row:
-
-                # Rook is moving downward
-
-                for i in range(end_row, start_row-1):
-                    print(board[i][start_col])
-                    if board[i][start_col] != 0:
-
-                        return False
-
-                return True'''
 
         elif end_row == start_row:
 
             # Rook is moving hortizontally
+            modifier =  (start_col-end_col)//abs(start_col-end_col)
+            for i in range(end_col+modifier, start_col, modifier):
 
-            if end_col > start_col:
+                print(f"{i}: {board[start_row][i]}")
+                if board[start_row][i] != 0:
 
-                # Rook is moving to the right
+                    return False
 
-                for i in range(end_row - start_row):
-
-                    if board[i][start_col] != 0:
-
-                        return False
-
-                return True
-
-            if end_col < start_col:
-
-                # Rook is moving to the left
-
-                for i in range(end_row - start_row):
-
-                    if board[i][start_col] != 0:
-
-                        return False
-
-                return True
-        else:
-
-            return False
-
-    # KING CASES
-
-    if piece_type == "k":
-
-        if abs(end_col - start_col) == 1 or abs(end_row - start_row) == 1:
 
             return True
 
@@ -284,83 +169,40 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
 
             return False
 
-    # BISHOP CASES
+    # KING CASES (FINISHED)
+
+    if piece_type == "k":
+
+        if abs(end_col - start_col) < 2 and abs(end_row - start_row) < 2:
+
+            return True
+
+        else:
+
+            return False
+
+    # BISHOP CASES (FINISHED)
 
     if piece_type == "b":
 
-        if end_row > start_row and end_col > start_col:
+        if abs(end_row - start_row) == abs(end_col - start_col):
 
-            # bishop is moving up and to the right
+            xd = 1 if end_col > start_col else -1
+            yd = 1 if end_row > start_row else -1
 
-            if end_row - start_row == end_col - start_col:
+            for i in range(1, abs(end_row - start_row)):
 
-                for i in range(end_row - start_row):
+                if str(board[start_row + (i * yd)][start_col + (i * xd)]) != "0":
 
-                    if board[start_row + i][start_col + i] != 0:
+                    return False
 
-                        return False
+            return True
 
-                return True
+        else:
 
-            else:
+            return False
 
-                return False
-
-        if end_row < start_row and end_col > start_col:
-
-            # bishop is moving down and to the right
-
-            if start_row - end_row == end_col - start_col:
-
-                for i in range(start_row - end_row):
-
-                    if board[start_row - i][start_col + i] != 0:
-
-                        return False
-
-                return True
-
-            else:
-
-                return False
-
-        if end_row > start_row and end_col < start_col:
-
-            # bishop is moving up and to the left
-
-            if end_row - start_row == start_col - end_col:
-
-                for i in range(end_row - start_row):
-
-                    if board[start_row + i][start_col - i] != 0:
-
-                        return False
-
-                return True
-
-            else:
-
-                return False
-
-        if end_row < start_row and end_col < start_col:
-
-            # bishop is moving down and to the left
-
-            if start_row - end_row == start_col - end_col:
-
-                for i in range(start_row - end_row):
-
-                    if board[start_row - i][start_col - i] != 0:
-
-                        return False
-
-                return True
-
-            else:
-
-                return False
-
-    # QUEEN CASES
+    # QUEEN CASES (FINISHED)
 
     if piece_type == "q":
 
@@ -370,133 +212,53 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
 
             # Rook is moving vertically
 
-            if end_row > start_row:
+            #if end_row > start_row:
 
                 # Rook is moving upward
+            modifier = (start_row-end_row)//abs(start_row-end_row)
+            for i in range(end_row+modifier, start_row, modifier):
 
-                for i in range(end_row - start_row):
+                print(f"{i}: {board[i][start_col]}")
+                if board[i][start_col] != 0:
 
-                    if board[i][start_col] != 0:
+                    return False
 
-                        return False
 
-                return True
+            return True
 
-            if end_row < start_row:
-
-                # Rook is moving downward
-
-                for i in range(end_row - start_row):
-
-                    if board[i][start_col] != 0:
-
-                        return False
-
-                return True
 
         elif end_row == start_row:
 
             # Rook is moving hortizontally
+            modifier =  (start_col-end_col)//abs(start_col-end_col)
+            for i in range(end_col+modifier, start_col, modifier):
 
-            if end_col > start_col:
+                print(f"{i}: {board[start_row][i]}")
+                if board[start_row][i] != 0:
 
-                # Rook is moving to the right
+                    return False
 
-                for i in range(end_row - start_row):
 
-                    if board[i][start_col] != 0:
-
-                        return False
-
-                return True
-
-            if end_col < start_col:
-
-                # Rook is moving to the left
-
-                for i in range(end_row - start_row):
-
-                    if board[i][start_col] != 0:
-
-                        return False
-
-                return True
+            return True
 
         # BISHOP CASES
 
-        if end_row > start_row and end_col > start_col:
+        elif abs(end_row - start_row) == abs(end_col - start_col):
 
-            # bishop is moving up and to the right
+            xd = 1 if end_col > start_col else -1
+            yd = 1 if end_row > start_row else -1
 
-            if end_row - start_row == end_col - start_col:
+            for i in range(1, abs(end_row - start_row)):
 
-                for i in range(end_row - start_row):
+                if str(board[start_row + (i * yd)][start_col + (i * xd)]) != "0":
 
-                    if board[start_row + i][start_col + i] != 0:
+                    return False
 
-                        return False
+            return True
 
-                return True
+        else:
 
-            else:
-
-                return False
-
-        if end_row < start_row and end_col > start_col:
-
-            # bishop is moving down and to the right
-
-            if start_row - end_row == end_col - start_col:
-
-                for i in range(start_row - end_row):
-
-                    if board[start_row - i][start_col + i] != 0:
-
-                        return False
-
-                return True
-
-            else:
-
-                return False
-
-        if end_row > start_row and end_col < start_col:
-
-            # bishop is moving up and to the left
-
-            if end_row - start_row == start_col - end_col:
-
-                for i in range(end_row - start_row):
-
-                    if board[start_row + i][start_col - i] != 0:
-
-                        return False
-
-                return True
-
-            else:
-
-                return False
-
-        if end_row < start_row and end_col < start_col:
-
-            # bishop is moving down and to the left
-
-            if start_row - end_row == start_col - end_col:
-
-                for i in range(start_row - end_row):
-
-                    if board[start_row - i][start_col - i] != 0:
-
-                        return False
-
-                return True
-
-            else:
-
-                return False
-
-        return False
+            return False
 
 def move (start_r, start_c, end_r, end_c, board, color):
     """
