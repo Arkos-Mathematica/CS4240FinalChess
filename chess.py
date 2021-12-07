@@ -55,6 +55,12 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
 
         return False
 
+    if (board[start_row][start_col]).isupper() != color:
+
+        print("Cannot move opponet's piece")
+
+        return False
+
     # SECOND thing to check: check
 
     if "check" == True:

@@ -22,7 +22,7 @@ width = 40
 height = 40
 margin = 10
 
-color=0
+color=1
 
 position1 = 0
 position2 = 0
@@ -81,7 +81,7 @@ def turn(row, column):
     if position1 == 0:
 
         if color:
-            start_row, start_col=row, column
+            start_row, start_col=row-1, column-1
             position1 = 1
 
         else:
@@ -94,7 +94,7 @@ def turn(row, column):
     elif position2 == 0:
 
         if color:
-            end_row, end_col = row, column
+            end_row, end_col = row-1, column-1
             position2 = 1
 
         else:
@@ -109,7 +109,7 @@ def turn(row, column):
 
         position1, position2 = 0, 0
 
-        #color = (color + 1) % 2
+        color = (color + 1) % 2
 
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
