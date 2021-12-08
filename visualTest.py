@@ -33,7 +33,7 @@ pygame.init()
 # Set the width and height of the screen [width, height]
 size = (8*width+9*margin, 8*height+9*margin)
 screen = pygame.display.set_mode(size)
-font = pygame.font.SysFont('Calibri', height, True, False)
+font = pygame.font.SysFont('segoeuisymbol', height, False)
 
 pygame.display.set_caption("My Game")
 
