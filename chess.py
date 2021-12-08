@@ -55,15 +55,9 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
 
         return False
 
-    if (board[start_row][start_col]).isupper() != color:
+    if str(board[start_row][start_col]).isupper() != color:
 
         print("Cannot move opponet's piece")
-
-        return False
-
-    # SECOND thing to check: check
-
-    if "check" == True:
 
         return False
 
@@ -72,7 +66,6 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
     # PAWN CASES (FINISHED)
 
     if piece_type == "p":
-
 
         forward = 1 if str(board[start_row][start_col]).isupper() else -1
 
@@ -286,4 +279,4 @@ def move (start_r, start_c, end_r, end_c, board, color):
         return (board)
     else:
         print('Illegal Move')
-        return "Illegal move"
+        return "Illegal Move"

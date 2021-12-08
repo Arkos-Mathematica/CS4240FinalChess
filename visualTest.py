@@ -104,12 +104,15 @@ def turn(row, column):
 
         print(end_col+1, end_row+1)
 
-
-        move(start_row, start_col, end_row, end_col, board, color)
-
         position1, position2 = 0, 0
 
-        color = (color + 1) % 2
+        if move(start_row, start_col, end_row, end_col, board, color) == "Illegal Move":
+
+            pass
+
+        else:
+
+            color = (color + 1) % 2
 
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
