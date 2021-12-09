@@ -27,6 +27,22 @@ color=1
 position1 = 0
 position2 = 0
 
+pieces_dict={
+    "p" : "Pieces/BP.png",
+    "P" : "Pieces/WP.png",
+    "r" : "Pieces/BR.png",
+    "R" : "Pieces/WR.png",
+    "n" : "Pieces/BN.png",
+    "N" : "Pieces/WN.png",
+    "b" : "Pieces/BB.png",
+    "B" : "Pieces/WB.png",
+    "q" : "Pieces/BQ.png",
+    "Q" : "Pieces/WQ.png",
+    "k" : "Pieces/BK.png",
+    "K" : "Pieces/WK.png",
+    "0" : "Pieces/0.png"
+}
+
 
 pygame.init()
 
@@ -53,8 +69,9 @@ def print_board(color):
         for row in range(8):
             for col in range(8):
                 if board[row][col] != 0:
-                    text = font.render(str(board[row][col]), True, BLACK)
-                    screen.blit(text, [margin+col*(margin+width), (7*height+8*margin) - (row*(margin+height))])
+                    piece = pygame.image.load(pieces_dict[str(board[row][col])])
+                    piece = pygame.transform.scale(piece, (width, height))
+                    screen.blit(piece, [margin+col*(margin+width), (7*height+8*margin) - (row*(margin+height))])
     else:
         for row in range (8):
             for col in range(8):
@@ -65,8 +82,9 @@ def print_board(color):
         for row in range(8):
             for col in range(8):
                 if board[row][col] != 0:
-                    text = font.render(str(board[row][col]), True, BLACK)
-                    screen.blit(text, [(7*width+8*margin)-(col*(margin+width)), margin+(row*(margin+height))])
+                    piece = pygame.image.load(pieces_dict[str(board[row][col])])
+                    piece = pygame.transform.scale(piece, (width, height))
+                    screen.blit(piece, [(7*width+8*margin)-(col*(margin+width)), margin+(row*(margin+height))])
 
 def turn(row, column):
 
@@ -105,6 +123,38 @@ def turn(row, column):
         print(end_col+1, end_row+1)
 
         position1, position2 = 0, 0
+
+        if end_row > 7:
+
+            end_row = 7
+
+        if end_row < 0:
+
+            end_row = 0
+
+        if end_col > 7:
+
+            end_col = 7
+
+        if end_col < 0:
+
+            end_col = 0
+
+        if start_row > 7:
+
+            start_row = 7
+
+        if start_row < 0:
+
+            start_row = 0
+
+        if start_col > 7:
+
+            start_col = 7
+
+        if start_col < 0:
+
+            start_col = 0
 
         if move(start_row, start_col, end_row, end_col, board, color) == "Illegal Move":
 
