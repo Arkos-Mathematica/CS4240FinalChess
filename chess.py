@@ -62,11 +62,11 @@ def is_in_check(board, color):
 
     for row in range(8):
 
-        print("fdjlksfjklsdjflks")
-
         for col in range(8):
 
             if board[row][col] == target:
+
+                print("king found")
 
                 king = (row, col)
 
