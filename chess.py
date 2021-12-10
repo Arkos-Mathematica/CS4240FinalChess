@@ -455,6 +455,7 @@ def is_legal(start_row, start_col, end_row, end_col, board, color):
 
             return False
 
+
 def move (start_r, start_c, end_r, end_c, board, color):
     """
     start_r (int): Row of the piece to be moved
