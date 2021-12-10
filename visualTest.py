@@ -132,6 +132,9 @@ def print_board(color):
                     piece = pygame.transform.scale(piece, (width, height))
                     screen.blit(piece, [(7*width+8*margin)-(col*(margin+width)), margin+(row*(margin+height))])
     board_sprites.draw(screen)
+    font = pygame.font.SysFont('montserrat', height//2, False)
+    text = font.render("BACK", True, BLACK)
+    screen.blit(text, [back.rect.x+4, back.rect.y+7])
 def print_home():
     #code for a home Screen
     screen.fill(WHITE)
@@ -140,6 +143,9 @@ def print_home():
     screen.blit(text, [size[0]/12, size[1]//3])
     home_sprites.draw(screen)
 
+    font = pygame.font.SysFont('montserrat', height//2, False)
+    text = font.render("START", True, BLACK)
+    screen.blit(text, [start.rect.x+4, start.rect.y+7])
 
 
 def turn(row, column):
