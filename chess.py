@@ -103,6 +103,8 @@ def is_in_check(board, color):
 
     for i in range(king[1] + 1, 8):
 
+        print("horizontally moving (right)")
+
         if board[king[0]][i] != 0:
 
             if board[king[0]][i].isupper() != color and board[king[0]][i].lower() == "r" or board[king[0]][i].lower() == "q":
@@ -114,6 +116,8 @@ def is_in_check(board, color):
                 break
 
     for i in range(king[1] - 1, 0):
+
+        print("horizontally moving (left)")
 
         if board[king[0]][i] != 0:
 
