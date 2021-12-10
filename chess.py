@@ -14,12 +14,34 @@ board = [
 ["r","n","b","q","k","b","n","r"]
 ]
 
+check_board = [
+["R","N","B","Q","K","B","N","R"],
+["P","P","P","P","P","P","P","P"],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+["p","p","p","p","p","p","p","p"],
+["r","n","b","q","k","b","n","r"]
+]
+
 final_board = [[p[x] for x in board[z]] for z in range(len(board))]
 
 def clear_board():
     print('clearing')
     global board
     board = [
+    ["R","N","B","Q","K","B","N","R"],
+    ["P","P","P","P","P","P","P","P"],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    ["p","p","p","p","p","p","p","p"],
+    ["r","n","b","q","k","b","n","r"]
+    ]
+
+    check_board = [
     ["R","N","B","Q","K","B","N","R"],
     ["P","P","P","P","P","P","P","P"],
     [0,0,0,0,0,0,0,0],
@@ -469,11 +491,11 @@ def move (start_r, start_c, end_r, end_c, board, color):
     """
     can_move = is_legal(start_r, start_c, end_r, end_c, board, color)
     if can_move == True:
-        check_board = board
         check_board[end_r][end_c]=str(check_board[start_r][start_c])
         check_board[start_r][start_c] = 0
-        if not is_in_check(check_board, color):
+        if is_in_check(check_board, color) == False:
             print(board[end_r][end_c])
+            print("start:"+ str(board[start_r][start_c]))
             board[end_r][end_c]=str(board[start_r][start_c])
             print("final: "+ board[end_r][end_c])
             board[start_r][start_c] = 0
