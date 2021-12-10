@@ -87,15 +87,15 @@ class Button(pygame.sprite.Sprite):
         self.rect.x = x
 
 # start/back as instances of Button class
-button_list = pygame.sprite.Group()
-all_sprite_list = pygame.sprite.Group()
+board_sprites = pygame.sprite.Group()
+home_sprites = pygame.sprite.Group()
 
 start = Button(GREEN, (size[0]//2)-25, (size[1]//2)-15)
-all_sprite_list.add(start)
+home_sprites.add(start)
 
 back = Button(GREEN, size[0]-60, 10)
-all_sprite_list.add(back)
-print (all_sprite_list)
+board_sprites.add(back)
+
 def change_status():
     print("changing status")
     global in_game
@@ -131,14 +131,14 @@ def print_board(color):
                     piece = pygame.image.load(pieces_dict[str(board[row][col])])
                     piece = pygame.transform.scale(piece, (width, height))
                     screen.blit(piece, [(7*width+8*margin)-(col*(margin+width)), margin+(row*(margin+height))])
-    all_sprite_list.draw(screen)
+    board_sprites.draw(screen)
 def print_home():
     #code for a home Screen
     screen.fill(WHITE)
     font = pygame.font.SysFont('montserrat', height, True)
     text = font.render("Welcome to Sanspassant", True, BLACK)
     screen.blit(text, [size[0]/12, size[1]//3])
-    all_sprite_list.draw(screen)
+    home_sprites.draw(screen)
 
 
 
@@ -248,7 +248,7 @@ while not done:
                 ["r","n","b","q","k","b","n","r"]
                 ]
                 print(in_game)
-            else:
+            elif in_game:
                 column = 1+(pos[0] // (width + margin))
                 row = 8-(pos[1] // (height + margin))
                 turn(row, column)
