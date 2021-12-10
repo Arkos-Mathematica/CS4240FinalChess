@@ -351,7 +351,7 @@ def move (start_r, start_c, end_r, end_c, board, color):
         print("final: "+ board[end_r][end_c])
         board[start_r][start_c] = 0
         return (board)
-    elif can_move == "in check"
+    #elif can_move == "in check"
     else:
         print('Illegal Move')
         return "Illegal Move"
