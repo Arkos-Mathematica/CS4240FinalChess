@@ -38,9 +38,9 @@ def is_in_check(board, color):
 
     target = "K" if color else "k"
 
-    for row in board:
+    for row in range(8):
 
-        for col in row:
+        for col in range(8):
 
             if board[row][col] == target:
 
