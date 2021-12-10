@@ -225,7 +225,7 @@ def turn(row, column):
         if legality == "Illegal Move":
 
             pass
-        if legality == "You are in check"
+        if legality == "You are in check":
             in_check()
 
         else:
