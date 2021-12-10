@@ -14,6 +14,17 @@ board = [
 ["r","n","b","q","k","b","n","r"]
 ]
 
+check_board = [
+["R","N","B","Q","K","B","N","R"],
+["P","P","P","Q",0,"P","P","P"],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,"r",0,0,0],
+[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0],
+["p","p","p","p","p","p","p","p"],
+["r","n","b","q","k","b","n","r"]
+]
+
 final_board = [[p[x] for x in board[z]] for z in range(len(board))]
 
 def clear_board():
