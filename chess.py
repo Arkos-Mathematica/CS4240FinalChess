@@ -17,7 +17,8 @@ board = [
 final_board = [[p[x] for x in board[z]] for z in range(len(board))]
 
 def clear_board():
-
+    print('clearing')
+    global board
     board = [
     ["R","N","B","Q","K","B","N","R"],
     ["P","P","P","P","P","P","P","P"],
