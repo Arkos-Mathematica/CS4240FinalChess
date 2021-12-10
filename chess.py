@@ -13,7 +13,6 @@ board = [
 ["p","p","p","p","p","p","p","p"],
 ["r","n","b","q","k","b","n","r"]
 ]
-
 check_board = [
 ["R","N","B","Q","K","B","N","R"],
 ["P","P","P","P","P","P","P","P"],
@@ -54,9 +53,13 @@ def clear_board():
 
 def is_in_check(board, color):
 
+    global board
+    global transfer_board
     global check_board
 
-    check_board = board
+    transfer_board = board
+
+    check_board = transfer_board
 
     print("is_in_check running")
 
@@ -524,6 +527,9 @@ def move (start_r, start_c, end_r, end_c, board, color):
             board[end_r][end_c]=str(board[start_r][start_c])
             print("final: "+ board[end_r][end_c])
             board[start_r][start_c] = 0
+            check_board[start_r][start_c] = board[start_r][start_c]
+            check_board[end_r][end_c] = board[end_r][end_c]
+
             return (board)
 
         else:
