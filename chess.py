@@ -107,6 +107,8 @@ def is_in_check(board, color):
 
         if board[king[0]][i] != 0:
 
+            print(str(board[king[0]][i]) + " is not occupied")
+
             if board[king[0]][i].isupper() != color and board[king[0]][i].lower() == "r" or board[king[0]][i].lower() == "q":
 
                 return True
