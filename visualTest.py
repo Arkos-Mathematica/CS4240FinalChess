@@ -252,7 +252,13 @@ while not done:
             done = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
             pos = event.pos
-            if start.rect.collidepoint(pos) or back.rect.collidepoint(pos):
+            if start.rect.collidepoint(pos) and not in_game:
+                print("you clicked a button!")
+                change_status()
+                color = 1
+                clear_board()
+                print(in_game)
+            if back.rect.collidepoint(pos) and in_game:
                 print("you clicked a button!")
                 change_status()
                 color = 1
