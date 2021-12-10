@@ -237,16 +237,7 @@ while not done:
                 print("you clicked a button!")
                 change_status()
                 color = 1
-                board = [
-                ["R","N","B","Q","K","B","N","R"],
-                ["P","P","P","P","P","P","P","P"],
-                [0,0,0,0,0,0,0,0],
-                [0,0,0,0,0,0,0,0],
-                [0,0,0,0,0,0,0,0],
-                [0,0,0,0,0,0,0,0],
-                ["p","p","p","p","p","p","p","p"],
-                ["r","n","b","q","k","b","n","r"]
-                ]
+                clear_board()
                 print(in_game)
             elif in_game:
                 column = 1+(pos[0] // (width + margin))

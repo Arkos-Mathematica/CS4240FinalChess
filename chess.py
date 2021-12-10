@@ -1,6 +1,6 @@
 print("I'm chessing!")
 
-p = {"Q":u'\u265B', "K":u'\u265A', "R":u'\u265C', "B":u'\u265D', "N":u'\u265E', "P":u'\u265F', 
+p = {"Q":u'\u265B', "K":u'\u265A', "R":u'\u265C', "B":u'\u265D', "N":u'\u265E', "P":u'\u265F',
      "q":u'\u2655', "k":u'\u2654', "b":u'\u2657', "r":u'\u2656', "n":u'\u2658', "p":u'\u2659', 0:0}
 
 board = [
@@ -12,9 +12,22 @@ board = [
 [0,0,0,0,0,0,0,0],
 ["p","p","p","p","p","p","p","p"],
 ["r","n","b","q","k","b","n","r"]
-] 
+]
 
-final_board = [[p[x] for x in board[z]] for z in range(len(board))] 
+final_board = [[p[x] for x in board[z]] for z in range(len(board))]
+
+def clear_board():
+
+    board = [
+    ["R","N","B","Q","K","B","N","R"],
+    ["P","P","P","P","P","P","P","P"],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    ["p","p","p","p","p","p","p","p"],
+    ["r","n","b","q","k","b","n","r"]
+    ]
 
 def is_in_check(board, color):
 
