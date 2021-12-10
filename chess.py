@@ -15,12 +15,12 @@ board = [
 ]
 
 check_board = [
-["R","N","B","Q","K","B","N","R"],
+["R","N","B","Q",0,"B","N","R"],
 ["P","P","P","Q",0,"P","P","P"],
 [0,0,0,0,0,0,0,0],
-[0,0,0,0,"r",0,0,0],
+[0,0,0,"K",0,0,0,0],
 [0,0,0,0,0,0,0,0],
-[0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,"b",0],
 ["p","p","p","p","p","p","p","p"],
 ["r","n","b","q","k","b","n","r"]
 ]
@@ -132,7 +132,7 @@ def is_in_check(board, color):
 
     row = king[0]-1
     col = king[1]+1
-    while row <8 and col < 8:
+    while row > 0 and col < 8:
         if board[row][col] != 0:
 
             if board[row][col].isupper() != color and board[row][col].lower() == "b" or board[row][col].lower() == "q":
@@ -147,7 +147,7 @@ def is_in_check(board, color):
 
     row = king[0]-1
     col = king[1]-1
-    while row <8 and col < 8:
+    while row > 0 and col > 0:
         if board[row][col] != 0:
 
             if board[row][col].isupper() != color and board[row][col].lower() == "b" or board[row][col].lower() == "q":
@@ -162,7 +162,7 @@ def is_in_check(board, color):
 
     row = king[0]+1
     col = king[1]-1
-    while row <8 and col < 8:
+    while row <8 and col > 0:
         if board[row][col] != 0:
 
             if board[row][col].isupper() != color and board[row][col].lower() == "b" or board[row][col].lower() == "q":
@@ -189,19 +189,21 @@ def is_in_check(board, color):
 
             return True
 
-    if str(board[king[0] + 1][king[1] + 2]).lower() == "n":
+    if str(board[king[0] - 1][king[1] + 2]).lower() == "n":
 
-        if board[king[0] + 1][king[1] + 2].isupper() != color:
-
-            return True
-
-    if str(board[king[0] + 1][king[1] + 2]).lower() == "n":
-
-        if board[king[0] + 1][king[1] + 2].isupper() != color:
+        if board[king[0] - 1][king[1] + 2].isupper() != color:
 
             return True
 
+    if str(board[king[0] - 1][king[1] - 2]).lower() == "n":
 
+        if board[king[0] - 1][king[1] - 2].isupper() != color:
+
+            return True
+
+
+
+    return False
 
 def is_legal(start_row, start_col, end_row, end_col, board, color):
 
