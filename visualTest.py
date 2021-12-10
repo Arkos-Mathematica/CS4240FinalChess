@@ -221,7 +221,7 @@ def turn(row, column):
             start_col = 0
 
         legality= move(start_row, start_col, end_row, end_col, board, color)
-        print(if_in_check(board, color))
+        print(is_in_check(board, color))
         if legality == "Illegal Move":
 
             pass
