@@ -90,7 +90,7 @@ class Button(pygame.sprite.Sprite):
 board_sprites = pygame.sprite.Group()
 home_sprites = pygame.sprite.Group()
 
-start = Button(GREEN, (size[0]//2)-25, (size[1]//2)-15)
+start = Button(GREEN, (size[0]//2)-25, (2*size[1]//3)-15)
 home_sprites.add(start)
 
 back = Button(GREEN, size[0]-60, 10)
@@ -148,6 +148,11 @@ def print_home():
     font = pygame.font.SysFont('montserrat', height//2, False)
     text = font.render("START", True, BLACK)
     screen.blit(text, [start.rect.x+4, start.rect.y+7])
+
+    font = pygame.font.SysFont('montserrat', height//2, False)
+    text = font.render("BY: ARI ETIN, RILEY WILD, TANYA VAZQUEZ", True, BLACK)
+    screen.blit(text, [size[0]//4, size[1]//2])
+
 
 
 def turn(row, column):
@@ -221,7 +226,7 @@ def turn(row, column):
             start_col = 0
 
         legality= move(start_row, start_col, end_row, end_col, board, color)
-        print("Check board ..." + str(is_in_check(board, color)))
+        print("Check board ..." + str(is_in_check(check_board, color)))
         if legality == "Illegal Move":
 
             pass

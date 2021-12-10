@@ -61,7 +61,24 @@ def is_in_check(board, color):
 
     # first: check if king is attacked horizontally/vertically
 
-    for i in range(king[0], 8):
+    for i in range(king[0] + 1, 8):
+
+        print("vertically moving")
+
+        if board[i][king[1]] != 0:
+
+            print("unoccupied space at " + str(board[i][king[1]]))
+
+            if board[i][king[1]].isupper() != color and board[i][king[1]].lower() == "r" or board[i][king[1]].lower() == "q":
+
+                return True
+
+            else:
+
+                break
+
+    for i in range(king[0]-1, 0):
+
 
         if board[i][king[1]] != 0:
 
@@ -73,19 +90,7 @@ def is_in_check(board, color):
 
                 break
 
-    for i in range(king[0], 0):
-
-        if board[i][king[1]] != 0:
-
-            if board[i][king[1]].isupper() != color and board[i][king[1]].lower() == "r" or board[i][king[1]].lower() == "q":
-
-                return True
-
-            else:
-
-                break
-
-    for i in range(king[1], 8):
+    for i in range(king[1] + 1, 8):
 
         if board[king[0]][i] != 0:
 
@@ -97,7 +102,7 @@ def is_in_check(board, color):
 
                 break
 
-    for i in range(king[1], 0):
+    for i in range(king[1] - 1, 0):
 
         if board[king[0]][i] != 0:
 
