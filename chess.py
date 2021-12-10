@@ -14,17 +14,6 @@ board = [
 ["r","n","b","q","k","b","n","r"]
 ]
 
-check_board = [
-["R","N","B","Q",0,"B","N","R"],
-["P","P","P","Q",0,"P","P","P"],
-[0,0,0,0,0,0,0,0],
-[0,0,0,"K",0,0,0,0],
-[0,0,0,0,0,0,0,0],
-[0,"b",0,0,0,0,0,0],
-["p","p","p","p","p","p","p","p"],
-["r","n","b","q","k","b","n","r"]
-]
-
 final_board = [[p[x] for x in board[z]] for z in range(len(board))]
 
 def clear_board():
@@ -177,31 +166,63 @@ def is_in_check(board, color):
 
     # third: check if king is attacked by knight
 
-    if str(board[king[0] + 1][king[1] + 2]).lower() == "n":
+    if king[0] < 6 and king[1] < 6:
 
-        if board[king[0] + 1][king[1] + 2].isupper() != color:
+        if str(board[king[0] + 1][king[1] + 2]).lower() == "n":
 
-            return True
+            if board[king[0] + 1][king[1] + 2].isupper() != color:
 
-    if str(board[king[0] + 2][king[1] + 1]).lower() == "n":
+                return True
 
-        if board[king[0] + 2][king[1] + 1].isupper() != color:
+        if str(board[king[0] + 2][king[1] + 1]).lower() == "n":
 
-            return True
+            if board[king[0] + 2][king[1] + 1].isupper() != color:
 
-    if str(board[king[0] - 1][king[1] + 2]).lower() == "n":
+                return True
 
-        if board[king[0] - 1][king[1] + 2].isupper() != color:
+    if king[0] > 1 and king[1] < 6:
 
-            return True
+        if str(board[king[0] - 1][king[1] + 2]).lower() == "n":
 
-    if str(board[king[0] - 1][king[1] - 2]).lower() == "n":
+            if board[king[0] - 1][king[1] + 2].isupper() != color:
 
-        if board[king[0] - 1][king[1] - 2].isupper() != color:
+                return True
 
-            return True
+        if str(board[king[0] - 2][king[1] + 1]).lower() == "n":
 
+            if board[king[0] - 2][king[1] + 1].isupper() != color:
 
+                return True
+
+        # halfway
+
+    if king[0] < 6 and king[1] > 1:
+
+        if str(board[king[0] + 1][king[1] - 2]).lower() == "n":
+
+            if board[king[0] + 1][king[1] - 2].isupper() != color:
+
+                return True
+
+        if str(board[king[0] + 2][king[1] - 1]).lower() == "n":
+
+            if board[king[0] + 2][king[1] - 1].isupper() != color:
+
+                return True
+
+    if king[0] > 1 and king[1] > 1:
+
+        if str(board[king[0] - 1][king[1] - 2]).lower() == "n":
+
+            if board[king[0] - 1][king[1] - 2].isupper() != color:
+
+                return True
+
+        if str(board[king[0] - 1][king[1] - 2]).lower() == "n":
+
+            if board[king[0] - 1][king[1] - 2].isupper() != color:
+
+                return True
 
     return False
 
@@ -447,11 +468,20 @@ def move (start_r, start_c, end_r, end_c, board, color):
     """
     can_move = is_legal(start_r, start_c, end_r, end_c, board, color)
     if can_move == True:
-        print(board[end_r][end_c])
-        board[end_r][end_c]=str(board[start_r][start_c])
-        print("final: "+ board[end_r][end_c])
-        board[start_r][start_c] = 0
-        return (board)
+        check_board = board
+        check_board[end_r][end_c]=str(check_board[start_r][start_c])
+        check_board[start_r][start_c] = 0
+        if not is_in_check(check_board, color):
+            print(board[end_r][end_c])
+            board[end_r][end_c]=str(board[start_r][start_c])
+            print("final: "+ board[end_r][end_c])
+            board[start_r][start_c] = 0
+            return (board)
+
+        else:
+
+            print("You are in check")
+            return "In check"
     #elif can_move == "in check"
     else:
         print('Illegal Move')

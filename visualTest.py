@@ -103,6 +103,8 @@ def change_status():
 
 def in_check():
     print("you are in check")
+    screen.fill(RED)
+    pygame.display.flip()
 
 #print board function
 def print_board(color):
@@ -230,7 +232,7 @@ def turn(row, column):
         if legality == "Illegal Move":
 
             pass
-        elif legality == "You are in check":
+        elif legality == "In check":
             in_check()
 
         else:
