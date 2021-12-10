@@ -115,10 +115,93 @@ def is_in_check(board, color):
                 break
 
     # second: check if king is attacked diagonally
+    row = king[0]+1
+    col = king[1]+1
+    while row <8 and col < 8:
+        if board[row][col] != 0:
+
+            if board[row][col].isupper() != color and board[row][col].lower() == "b" or board[row][col].lower() == "q":
+
+                return True
+
+            else:
+
+                break
+        row = row + 1
+        col = col + 1
+
+    row = king[0]-1
+    col = king[1]+1
+    while row <8 and col < 8:
+        if board[row][col] != 0:
+
+            if board[row][col].isupper() != color and board[row][col].lower() == "b" or board[row][col].lower() == "q":
+
+                return True
+
+            else:
+
+                break
+        row = row - 1
+        col = col + 1
+
+    row = king[0]-1
+    col = king[1]-1
+    while row <8 and col < 8:
+        if board[row][col] != 0:
+
+            if board[row][col].isupper() != color and board[row][col].lower() == "b" or board[row][col].lower() == "q":
+
+                return True
+
+            else:
+
+                break
+        row = row - 1
+        col = col - 1
+
+    row = king[0]+1
+    col = king[1]-1
+    while row <8 and col < 8:
+        if board[row][col] != 0:
+
+            if board[row][col].isupper() != color and board[row][col].lower() == "b" or board[row][col].lower() == "q":
+
+                return True
+
+            else:
+
+                break
+        row = row + 1
+        col = col - 1
+
+    # third: check if king is attacked by knight
+
+    if str(board[king[0] + 1][king[1] + 2]).lower() == "n":
+
+        if board[king[0] + 1][king[1] + 2].isupper() != color:
+
+            return True
+
+    if str(board[king[0] + 2][king[1] + 1]).lower() == "n":
+
+        if board[king[0] + 2][king[1] + 1].isupper() != color:
+
+            return True
+
+    if str(board[king[0] + 1][king[1] + 2]).lower() == "n":
+
+        if board[king[0] + 1][king[1] + 2].isupper() != color:
+
+            return True
+
+    if str(board[king[0] + 1][king[1] + 2]).lower() == "n":
+
+        if board[king[0] + 1][king[1] + 2].isupper() != color:
+
+            return True
 
 
-
-    return False
 
 def is_legal(start_row, start_col, end_row, end_col, board, color):
 
