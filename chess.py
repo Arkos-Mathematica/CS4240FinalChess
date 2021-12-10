@@ -82,8 +82,8 @@ def is_in_check(board, color):
             print("unoccupied space at " + str(board[i][king[1]]))
 
             if board[i][king[1]].isupper() != color and board[i][king[1]].lower() == "r" or board[i][king[1]].lower() == "q":
-
-                return True
+                print("you are in check (vertically up)")
+                #return True
 
             else:
 
@@ -95,8 +95,8 @@ def is_in_check(board, color):
         if board[i][king[1]] != 0:
 
             if board[i][king[1]].isupper() != color and board[i][king[1]].lower() == "r" or board[i][king[1]].lower() == "q":
-
-                return True
+                print("you are in check (vertically down)")
+                #return True
 
             else:
 
@@ -111,8 +111,8 @@ def is_in_check(board, color):
             print(str(board[king[0]][i]) + " is not occupied")
 
             if board[king[0]][i].isupper() != color and board[king[0]][i].lower() == "r" or board[king[0]][i].lower() == "q":
-
-                return True
+                print("you are in check (horizontally right)")
+                #return True
 
             else:
 
@@ -125,8 +125,8 @@ def is_in_check(board, color):
         if board[king[0]][i] != 0:
 
             if board[king[0]][i].isupper() != color and board[king[0]][i].lower() == "r" or board[king[0]][i].lower() == "q":
-
-                return True
+                print("you are in check (horizontally left)")
+                #return True
 
             else:
 
@@ -139,8 +139,8 @@ def is_in_check(board, color):
         if board[row][col] != 0:
 
             if board[row][col].isupper() != color and board[row][col].lower() == "b" or board[row][col].lower() == "q":
-
-                return True
+                print("you are in check diagonally up right")
+                #return True
 
             else:
 
@@ -155,7 +155,8 @@ def is_in_check(board, color):
 
             if board[row][col].isupper() != color and board[row][col].lower() == "b" or board[row][col].lower() == "q":
 
-                return True
+                print("you are in check down up right")
+                #return True
 
             else:
 
@@ -169,8 +170,8 @@ def is_in_check(board, color):
         if board[row][col] != 0:
 
             if board[row][col].isupper() != color and board[row][col].lower() == "b" or board[row][col].lower() == "q":
-
-                return True
+                print("you are in check diagonally down left")
+                #return True
 
             else:
 
@@ -184,8 +185,8 @@ def is_in_check(board, color):
         if board[row][col] != 0:
 
             if board[row][col].isupper() != color and board[row][col].lower() == "b" or board[row][col].lower() == "q":
-
-                return True
+                print("you are in check diagonally up left")
+                #return True
 
             else:
 
@@ -200,28 +201,28 @@ def is_in_check(board, color):
         if str(board[king[0] + 1][king[1] + 2]).lower() == "n":
 
             if board[king[0] + 1][king[1] + 2].isupper() != color:
-
-                return True
+                print("you are in check knight")
+                #return True
 
         if str(board[king[0] + 2][king[1] + 1]).lower() == "n":
 
             if board[king[0] + 2][king[1] + 1].isupper() != color:
-
-                return True
+                print("you are in check knight")
+                #return True
 
     if king[0] > 1 and king[1] < 6:
 
         if str(board[king[0] - 1][king[1] + 2]).lower() == "n":
 
             if board[king[0] - 1][king[1] + 2].isupper() != color:
-
-                return True
+                print("you are in check knight")
+                #return True
 
         if str(board[king[0] - 2][king[1] + 1]).lower() == "n":
 
             if board[king[0] - 2][king[1] + 1].isupper() != color:
-
-                return True
+                print("you are in check knight")
+                #return True
 
         # halfway
 
@@ -230,41 +231,41 @@ def is_in_check(board, color):
         if str(board[king[0] + 1][king[1] - 2]).lower() == "n":
 
             if board[king[0] + 1][king[1] - 2].isupper() != color:
-
-                return True
+                print("you are in check knight")
+                #return True
 
         if str(board[king[0] + 2][king[1] - 1]).lower() == "n":
 
             if board[king[0] + 2][king[1] - 1].isupper() != color:
-
-                return True
+                print("you are in check knight")
+                #return True
 
     if king[0] > 1 and king[1] > 1:
 
         if str(board[king[0] - 1][king[1] - 2]).lower() == "n":
 
             if board[king[0] - 1][king[1] - 2].isupper() != color:
-
-                return True
+                print("you are in check knight")
+                #return True
 
         if str(board[king[0] - 1][king[1] - 2]).lower() == "n":
 
             if board[king[0] - 1][king[1] - 2].isupper() != color:
-
-                return True
+                print("you are in check knight")
+                #return True
     #pawns
 
     if color:
 
         if str(board[king[0] + 1][king[1] + 1]) == "p" or str(board[king[0] + 1][king[1] - 1]) == "p":
-
-            return True
+            print("you are in check pawn")
+            #return True
 
     if color:
 
         if str(board[king[0] - 1][king[1] + 1]) == "P" or str(board[king[0] - 1][king[1] - 1]) == "P":
-
-            return True
+            print("you are in check pawn")
+            #return True
 
     return False
 
