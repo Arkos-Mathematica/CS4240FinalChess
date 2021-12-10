@@ -251,6 +251,19 @@ def is_in_check(board, color):
             if board[king[0] - 1][king[1] - 2].isupper() != color:
 
                 return True
+    #pawns
+
+    if color:
+
+        if str(board[king[0] + 1][king[1] + 1]) == "p" or str(board[king[0] + 1][king[1] - 1]) == "p":
+
+            return True
+
+    if color:
+
+        if str(board[king[0] - 1][king[1] + 1]) == "P" or str(board[king[0] - 1][king[1] - 1]) == "P":
+
+            return True
 
     return False
 
