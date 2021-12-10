@@ -100,6 +100,8 @@ def is_in_check(board, color):
 
     # second: check if king is attacked diagonally
 
+
+
     return False
 
 def is_legal(start_row, start_col, end_row, end_col, board, color):
