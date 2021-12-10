@@ -53,14 +53,6 @@ def clear_board():
 
 def is_in_check(board, color):
 
-    global board
-    global transfer_board
-    global check_board
-
-    transfer_board = board
-
-    check_board = transfer_board
-
     print("is_in_check running")
 
     # FIRST: find the KING
