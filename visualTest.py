@@ -27,6 +27,8 @@ color=1
 position1 = 0
 position2 = 0
 
+in_game = False
+
 pieces_dict={
     "p" : "Pieces/BP.png",
     "P" : "Pieces/WP.png",
@@ -47,7 +49,7 @@ pieces_dict={
 pygame.init()
 
 # Set the width and height of the screen [width, height]
-size = (8*width+9*margin, 8*height+9*margin)
+size = (8*width+9*margin + 70, 8*height+9*margin)
 screen = pygame.display.set_mode(size)
 font = pygame.font.SysFont('segoeuisymbol', height, False)
 
@@ -55,6 +57,50 @@ pygame.display.set_caption("My Game")
 
 # Loop until the user clicks the close button.
 done = False
+
+
+
+#start creating button classes from http://programarcadegames.com/python_examples/show_file.php?file=sprite_collect_blocks.py
+class Button(pygame.sprite.Sprite):
+    """
+    This class represents the button
+    It derives from the "Sprite" class in Pygame
+    """
+    def __init__(self, color, x, y):
+        """ Constructor. Pass in the color of the block, the function it calls,
+        and its x and y position. """
+        # Call the parent class (Sprite) constructor
+        super().__init__()
+
+        # Create an image of the block, and fill it with a color.
+        # This could also be an image loaded from the disk.
+        self.image = pygame.Surface([50, 30])
+        self.image.fill(color)
+
+        # Fetch the rectangle object that has the dimensions of the image
+        # image.
+        # Update the position of this object by setting the values
+        # of rect.x and rect.y
+        self.rect = self.image.get_rect()
+
+        self.rect.y = y
+        self.rect.x = x
+
+# start/back as instances of Button class
+button_list = pygame.sprite.Group()
+all_sprite_list = pygame.sprite.Group()
+
+start = Button(GREEN, (size[0]//2)-25, (size[1]//2)-15)
+all_sprite_list.add(start)
+
+back = Button(GREEN, size[0]-60, 10)
+all_sprite_list.add(back)
+print (all_sprite_list)
+def change_status():
+    print("changing status")
+    global in_game
+    in_game = not in_game
+
 
 #print board function
 def print_board(color):
@@ -85,6 +131,16 @@ def print_board(color):
                     piece = pygame.image.load(pieces_dict[str(board[row][col])])
                     piece = pygame.transform.scale(piece, (width, height))
                     screen.blit(piece, [(7*width+8*margin)-(col*(margin+width)), margin+(row*(margin+height))])
+    all_sprite_list.draw(screen)
+def print_home():
+    #code for a home Screen
+    screen.fill(WHITE)
+    font = pygame.font.SysFont('montserrat', height, True)
+    text = font.render("Welcome to Sanspassant", True, BLACK)
+    screen.blit(text, [size[0]/12, size[1]//3])
+    all_sprite_list.draw(screen)
+
+
 
 def turn(row, column):
 
@@ -176,10 +232,26 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            pos = pygame.mouse.get_pos()
-            column = 1+(pos[0] // (width + margin))
-            row = 8-(pos[1] // (height + margin))
-            turn(row, column)
+            pos = event.pos
+            if start.rect.collidepoint(pos) or back.rect.collidepoint(pos):
+                print("you clicked a button!")
+                change_status()
+                color = 1
+                board = [
+                ["R","N","B","Q","K","B","N","R"],
+                ["P","P","P","P","P","P","P","P"],
+                [0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0],
+                ["p","p","p","p","p","p","p","p"],
+                ["r","n","b","q","k","b","n","r"]
+                ]
+                print(in_game)
+            else:
+                column = 1+(pos[0] // (width + margin))
+                row = 8-(pos[1] // (height + margin))
+                turn(row, column)
 
 
     # --- Game logic should go here
@@ -194,7 +266,10 @@ while not done:
     # --- Drawing code should go here
 
 
-    print_board(color)
+    if in_game:
+        print_board(color)
+    else:
+        print_home()
 
 
     # --- Go ahead and update the screen with what we've drawn.
