@@ -101,6 +101,8 @@ def change_status():
     global in_game
     in_game = not in_game
 
+def in_check():
+    print("you are in check")
 
 #print board function
 def print_board(color):
@@ -218,9 +220,13 @@ def turn(row, column):
 
             start_col = 0
 
-        if move(start_row, start_col, end_row, end_col, board, color) == "Illegal Move":
+        legality= move(start_row, start_col, end_row, end_col, board, color)
+        print(if_in_check(board, color))
+        if legality == "Illegal Move":
 
             pass
+        if legality == "You are in check"
+            in_check()
 
         else:
 

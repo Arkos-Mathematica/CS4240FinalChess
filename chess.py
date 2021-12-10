@@ -32,6 +32,8 @@ def clear_board():
 
 def is_in_check(board, color):
 
+    print("is_in_check running")
+
     # FIRST: find the KING
 
     target = "K" if color else "k"
@@ -48,6 +50,57 @@ def is_in_check(board, color):
 
     # first: check if king is attacked horizontally/vertically
 
+    for i in range(king[0], 8):
+
+        if board[i][king[1]] != 0:
+
+            if board[i][king[1]].isupper() != color and board[i][king[1]].lower() == "r" or board[i][king[1]].lower() == "q":
+
+                return True
+
+            else:
+
+                break
+
+    for i in range(king[0], 0):
+
+        if board[i][king[1]] != 0:
+
+            if board[i][king[1]].isupper() != color and board[i][king[1]].lower() == "r" or board[i][king[1]].lower() == "q":
+
+                return True
+
+            else:
+
+                break
+
+    for i in range(king[1], 8):
+
+        if board[king[0]][i] != 0:
+
+            if board[king[0]][i].isupper() != color and board[king[0]][i].lower() == "r" or board[king[0]][i].lower() == "q":
+
+                return True
+
+            else:
+
+                break
+
+    for i in range(king[1], 0):
+
+        if board[king[0]][i] != 0:
+
+            if board[king[0]][i].isupper() != color and board[king[0]][i].lower() == "r" or board[king[0]][i].lower() == "q":
+
+                return True
+
+            else:
+
+                break
+
+    # second: check if king is attacked diagonally
+
+    return False
 
 def is_legal(start_row, start_col, end_row, end_col, board, color):
 
@@ -289,13 +342,14 @@ def move (start_r, start_c, end_r, end_c, board, color):
 
     color (bool): Either 1 or 0, represents current player (white or black)
     """
-
-    if is_legal(start_r, start_c, end_r, end_c, board, color) == True:
+    can_move = is_legal(start_r, start_c, end_r, end_c, board, color)
+    if can_move == True:
         print(board[end_r][end_c])
         board[end_r][end_c]=str(board[start_r][start_c])
         print("final: "+ board[end_r][end_c])
         board[start_r][start_c] = 0
         return (board)
+    elif can_move == "in check"
     else:
         print('Illegal Move')
         return "Illegal Move"
